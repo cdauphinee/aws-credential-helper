@@ -20,3 +20,4 @@ jobs:
         if: always()
         with:
           path: test-results.xml
+          access-token: ${{ secrets.GITHUB_TOKEN }}
