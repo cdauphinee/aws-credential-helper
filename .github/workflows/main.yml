@@ -16,8 +16,7 @@ jobs:
         run: |
           dotnet test --logger "nunit;logfilepath=test-results.xml"
           
-      - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v1
+      - uses: MirrorNG/nunit-reporter@v1.0.9
+        if: always()
         with:
-          if: always()
-          files: test-results.xml
+          path: test-results.xml
