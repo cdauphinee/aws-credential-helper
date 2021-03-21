@@ -1,0 +1,23 @@
+name: Run Tests
+on: [pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '5.0.x'
+
+      - uses: actions/checkout@v2
+
+      - name: Run Tests
+        run: |
+          dotnet test --logger "nunit;logfilepath=test-results.xml"
+          
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        with:
+          if: always()
+          files: test-results.xml
